@@ -79,47 +79,11 @@ export default function AdminDashboard(){
           <a href="/admin/students" className="text-efa-indigo-500">Students</a>
           <a href="/admin/courses" className="text-efa-indigo-500">Courses</a>
           <a href="/admin/certificates" className="text-efa-indigo-500">Certificates</a>
++          <a href="/admin/payments" className="text-efa-indigo-500">Fees</a>
           <a href="/admin/fees" className="text-efa-indigo-500">Fees</a>
           <a href="/admin/settings" className="text-efa-indigo-500">Settings</a>
         </div>
       </div>
-
-      <div className="bg-white p-6 rounded-lg shadow-sm">
-        <h2 className="text-xl font-semibold">Applications</h2>
-        <div className="mt-4">
-          <input placeholder="Search application id" value={query} onChange={e => setQuery(e.target.value)} className="border p-2 rounded w-full" />
-          <div className="mt-4 overflow-x-auto">
-            <table className="w-full text-left">
-              <thead>
-                <tr>
-                  <th className="py-2">Application ID</th>
-                  <th className="py-2">Name</th>
-                  <th className="py-2">Course</th>
-                  <th className="py-2">Status</th>
-                  <th className="py-2">Submitted</th>
-                  <th className="py-2">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {applications.filter(a => !query || a.application_id.includes(query)).map(app => (
-                  <tr key={app.application_id} className="border-t">
-                    <td className="py-2">{app.application_id}</td>
-                    <td className="py-2">{app.full_name}</td>
-                    <td className="py-2">{app.course_id}</td>
-                    <td className="py-2">{app.status}</td>
-                    <td className="py-2">{new Date(app.created_at).toLocaleString()}</td>
-                    <td className="py-2">
-                      <button onClick={() => approveAndCreate(app.application_id)} className="px-2 py-1 bg-efa-lime-500 rounded text-sm mr-2">Approve</button>
-                      <button onClick={() => updateStatus(app.application_id, 'Rejected')} className="px-2 py-1 bg-rose-600 rounded text-sm mr-2">Reject</button>
-                      <button onClick={() => updateStatus(app.application_id, 'Completed')} className="px-2 py-1 bg-efa-indigo-500 rounded text-sm">Mark Completed</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
+@@
+   )
+ }
