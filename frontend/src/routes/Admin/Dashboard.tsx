@@ -79,11 +79,36 @@ export default function AdminDashboard(){
           <a href="/admin/students" className="text-efa-indigo-500">Students</a>
           <a href="/admin/courses" className="text-efa-indigo-500">Courses</a>
           <a href="/admin/certificates" className="text-efa-indigo-500">Certificates</a>
-+          <a href="/admin/payments" className="text-efa-indigo-500">Fees</a>
+          <a href="/admin/payments" className="text-efa-indigo-500">Fees</a>
           <a href="/admin/fees" className="text-efa-indigo-500">Fees</a>
           <a href="/admin/settings" className="text-efa-indigo-500">Settings</a>
         </div>
       </div>
-@@
-   )
- }
+
+      <div className="bg-white p-6 rounded">
+        {/* Placeholder overview; actual dashboard widgets live elsewhere */}
+        <h2 className="font-semibold">Applications</h2>
+        <div className="mt-4">
+          {applications.length === 0 ? (
+            <div className="text-sm text-gray-500">No recent applications</div>
+          ) : (
+            <ul className="space-y-2">
+              {applications.map(app => (
+                <li key={app.application_id} className="border p-3 rounded flex justify-between items-center">
+                  <div>
+                    <div className="font-medium">{app.full_name}</div>
+                    <div className="text-sm text-gray-600">Course: {app.course_id} • Status: {app.status}</div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button onClick={() => approveAndCreate(app.application_id)} className="px-3 py-1 bg-efa-lime-500 rounded text-sm">Approve</button>
+                    <button onClick={() => updateStatus(app.application_id, 'Rejected')} className="px-3 py-1 bg-rose-600 rounded text-sm">Reject</button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
