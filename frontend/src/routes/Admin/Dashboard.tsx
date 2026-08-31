@@ -39,6 +39,20 @@ export default function AdminDashboard(){
 
   React.useEffect(() => { fetchApplications() }, [])
 
+  async function approveAndCreate(appId: string) {
+    try {
+      const { data, error } = await supabase.rpc('approve_application_and_create_student', { p_application_id: appId })
+      if (error) {
+        throw error
+      }
+      alert('Application approved and student created: ' + (data?.[0]?.student_id ?? ''))
+      fetchApplications()
+    } catch (err:any) {
+      console.error(err)
+      alert('Failed to approve application. Ensure RPC/migrations are applied and you are an admin.')
+    }
+  }
+
   async function updateStatus(applicationId: string, status: string) {
     const { error } = await supabase
       .from('applications')
@@ -59,6 +73,15 @@ export default function AdminDashboard(){
       <div className="bg-white p-6 rounded-lg shadow-sm">
         <h1 className="text-2xl font-bold">Admin Dashboard</h1>
         <div className="mt-2 text-gray-600">Signed in as: <span className="font-medium">{userEmail}</span></div>
+        <div className="mt-4 flex gap-4">
+          <a href="/admin" className="text-efa-indigo-500">Dashboard</a>
+          <a href="/admin/applications" className="text-efa-indigo-500">Applications</a>
+          <a href="/admin/students" className="text-efa-indigo-500">Students</a>
+          <a href="/admin/courses" className="text-efa-indigo-500">Courses</a>
+          <a href="/admin/certificates" className="text-efa-indigo-500">Certificates</a>
+          <a href="/admin/fees" className="text-efa-indigo-500">Fees</a>
+          <a href="/admin/settings" className="text-efa-indigo-500">Settings</a>
+        </div>
       </div>
 
       <div className="bg-white p-6 rounded-lg shadow-sm">
@@ -86,7 +109,7 @@ export default function AdminDashboard(){
                     <td className="py-2">{app.status}</td>
                     <td className="py-2">{new Date(app.created_at).toLocaleString()}</td>
                     <td className="py-2">
-                      <button onClick={() => updateStatus(app.application_id, 'Approved')} className="px-2 py-1 bg-efa-lime-500 rounded text-sm mr-2">Approve</button>
+                      <button onClick={() => approveAndCreate(app.application_id)} className="px-2 py-1 bg-efa-lime-500 rounded text-sm mr-2">Approve</button>
                       <button onClick={() => updateStatus(app.application_id, 'Rejected')} className="px-2 py-1 bg-rose-600 rounded text-sm mr-2">Reject</button>
                       <button onClick={() => updateStatus(app.application_id, 'Completed')} className="px-2 py-1 bg-efa-indigo-500 rounded text-sm">Mark Completed</button>
                     </td>
