@@ -1,0 +1,128 @@
+:root{
+  --bg:#f7fbff;
+  --surface:#ffffff;
+  --muted:#6b7280;
+  --text:#0f172a;
+  --accent-500:#4f46e5; /* indigo-600 */
+  --accent-600:#4338ca;
+  --accent-400:#6366f1;
+  --border:rgba(15,23,42,0.06);
+  --radius:10px;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+.container{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 16px;
+}
+.site-header{
+  background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:40;
+  backdrop-filter: blur(6px);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  padding:12px 0;
+}
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:600;
+  font-size:1.05rem;
+}
+.brand img{height:40px}
+.nav-toggle{
+  background:none;
+  border:0;
+  padding:8px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.hamburger,
+.hamburger::before,
+.hamburger::after{
+  display:block;
+  width:22px;
+  height:2px;
+  background:var(--text);
+  border-radius:2px;
+  position:relative;
+}
+.hamburger::before{content:""; position:absolute; transform:translateY(-7px)}
+.hamburger::after{content:""; position:absolute; transform:translateY(7px)}
+.primary-nav{display:none}
+.primary-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.primary-nav a{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:8px}
+.primary-nav a:hover, .primary-nav a:focus{background:rgba(99,102,241,0.08);outline:none}
+
+/* Hero */
+.hero{
+  padding:36px 0 28px;
+}
+.hero-inner{display:flex;flex-direction:column;gap:18px;padding:28px;border-radius:var(--radius);background:linear-gradient(180deg,var(--surface),#fbfdff);box-shadow:0 6px 18px rgba(15,23,42,0.03)}
+.hero h1{margin:0;font-size:1.5rem}
+.lead{color:var(--muted);margin:0;max-width:60ch}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-block;padding:10px 16px;border-radius:10px;text-decoration:none;font-weight:600;border:1px solid transparent}
+.btn-primary{background:var(--accent-500);color:#fff;box-shadow:0 6px 18px rgba(79,70,229,0.12)}
+.btn-outline{background:transparent;color:var(--accent-600);border-color:rgba(67,56,202,0.12)}
+.contact-small{color:var(--muted);font-size:0.95rem;margin:0}
+
+.section{padding:28px 0}
+.section h2{margin-top:0}
+.muted{color:var(--muted)}
+
+/* Courses grid */
+.courses-grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:16px}
+.course-card{background:var(--surface);padding:16px;border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 14px rgba(2,6,23,0.03)}
+.course-card h3{margin:0 0 6px}
+
+/* Contact & footer */
+.site-footer{padding:18px 0;background:transparent;border-top:1px solid var(--border);}
+.footer-inner{display:flex;align-items:center;justify-content:center;padding:8px}
+
+/* Large screens */
+@media(min-width:720px){
+  .hero-inner{flex-direction:row;align-items:center;justify-content:space-between}
+  .hero h1{font-size:1.9rem}
+  .lead{max-width:40ch}
+}
+@media(min-width:900px){
+  .header-inner{padding:18px 0}
+  .primary-nav{display:block}
+  .primary-nav ul{flex-direction:row;gap:18px}
+  .nav-toggle{display:none}
+  .courses-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+/* Accessibility focus */
+:focus{outline:none}
+a:focus{box-shadow:0 0 0 4px rgba(99,102,241,0.12);border-radius:8px}
+
+/* Utility */
+.visually-hidden{position:absolute;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
+
+/* Open nav state for mobile */
+.primary-nav.open{position:absolute;right:16px;top:68px;background:var(--surface);padding:12px;border-radius:12px;box-shadow:0 10px 30px rgba(2,6,23,0.08);min-width:200px}
