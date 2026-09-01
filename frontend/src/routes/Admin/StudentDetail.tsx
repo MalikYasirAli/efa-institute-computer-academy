@@ -1,7 +1,5 @@
-<>
-  <div>
-    <StudentPaymentsSection studentId={student.student_id} />
-  </div>
+<div>
+  <StudentPaymentsSection studentId={student.student_id} />
 
   <div className="bg-white p-6 rounded">
     <h2 className="font-semibold">Attendance</h2>
@@ -10,4 +8,4 @@
       <StudentAttendanceSection studentId={student.id} />
     </div>
   </div>
-</>
+</div>
