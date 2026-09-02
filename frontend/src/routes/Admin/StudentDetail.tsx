@@ -2,8 +2,6 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { fetchStudentByStudentId, updateStudent, getStudentPhotoSignedUrl } from '@/lib/students'
 import StudentCertificatesSection from '@/components/StudentCertificatesSection'
-import StudentPaymentsSection from '@/components/StudentPaymentsSection'
-import StudentAttendanceSection from '@/components/StudentAttendanceSection'
 
 export default function StudentDetail(){
   const { id } = useParams() as { id?: string }
@@ -117,14 +115,6 @@ export default function StudentDetail(){
       <div>
         {/* Payments/Fees - pass student.student_id (human ID) to payments/certificates */}
         <StudentPaymentsSection studentId={student.student_id} />
-      </div>
-
-      <div className="bg-white p-6 rounded">
-        <h2 className="font-semibold">Attendance</h2>
-        <div className="mt-4">
-          {/* Attendance expects the students.id UUID */}
-          <StudentAttendanceSection studentId={student.id} />
-        </div>
       </div>
 
       <div className="bg-white p-6 rounded">
